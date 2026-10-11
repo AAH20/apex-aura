@@ -1,0 +1,29 @@
+replicaCount: 3
+
+image:
+  repository: registry.connect.redhat.com/apex/aura-kernel
+  pullPolicy: IfNotPresent
+  tag: "1.0.0"
+
+resources:
+  limits:
+    cpu: "16"
+    memory: "32Gi"
+    nvidia.com/gpu: "1"
+  requests:
+    cpu: "4"
+    memory: "8Gi"
+
+dpu:
+  enabled: true
+  pciDevice: "0000:03:00.0"
+  rdmaPort: 4791
+
+watsonx:
+  govVaultEndpoint: "https://watsonx-governance.openshift.local:8443"
+  dataLakehouseEndpoint: "https://watsonx-data.openshift.local:9083"
+  tenantId: "sovereign_tenant_apex"
+
+models:
+  primary: "ibm/granite-3.0-8b-instruct"
+  draftMoE: "ibm/granite-3.0-3b-a800m"

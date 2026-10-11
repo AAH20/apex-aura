@@ -1,0 +1,20 @@
+FROM registry.access.redhat.com/ubi9/ubi-minimal:latest
+
+LABEL name="apex-aura-kernel" \
+      vendor="APEX Sovereign Systems" \
+      version="1.0.0" \
+      summary="APEX_AURA Sovereign Cognitive Fabric & High-Velocity AI Hypervisor"
+
+RUN microdnf update -y && \
+    microdnf install -y python3.11 python3.11-pip && \
+    microdnf clean all
+
+WORKDIR /app
+COPY . /app
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app
+
+EXPOSE 8080 8765
+
+CMD ["python3", "benchmarks/run_master_test.py"]

@@ -1,0 +1,20 @@
+{
+  "shm_ring": {
+    "p50_us": 0.958,
+    "p99_us": 4.208,
+    "throughput_ops_sec": 661959
+  },
+  "decision_router": {
+    "tier_0_jev_p50_us": 2.083,
+    "tier_1_clef_p50_us": 1.084,
+    "tier_3_nim_p50_us": 179.25
+  },
+  "contract_rollback": {
+    "p50_rollback_us": 0.708,
+    "p99_rollback_us": 3.375
+  },
+  "merkle_audit": {
+    "p50_audit_us": 4.0,
+    "root_hash": "38fe3b3ce6bf8cac15ff395e5894885f6154bdc40136821ba01b92b434b300f0"
+  }
+}
