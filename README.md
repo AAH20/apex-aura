@@ -22,14 +22,14 @@
 
 ## 1. Executive Manifesto & The AWS Bedrock Defect Matrix
 
-Enterprise adoption of hyperscaler managed agent platforms—specifically **AWS Bedrock**, **Amazon Bedrock Agents**, and **AWS SageMaker**—has hit an insurmountable architectural ceiling. While marketed as turnkey managed enterprise AI, Bedrock suffers from four fundamental structural vulnerabilities rooted in legacy multi-tenant virtualization:
+Hyperscaler managed agent platforms (AWS Bedrock, Amazon Bedrock Agents, and AWS SageMaker) hit a hard wall in production. Multi-tenant cloud virtualization introduces four fatal bottlenecks:
 
-1. **The TTFT & Latency Penalty (400ms – 800ms):** Bedrock traffic traverses multi-tenant API gateways, authentication sidecars, and noisy virtualized hypervisors. Time-To-First-Token (TTFT) averages **400ms–800ms**, making real-time closed-loop control (robotics, high-frequency execution, sub-second native desktop automation, and conversational voice avatars) mathematically impossible.
+1. **The TTFT Latency Penalty (400ms to 800ms):** Bedrock traffic traverses multi-tenant API gateways, auth sidecars, and noisy virtualized hypervisors. Time-To-First-Token averages 400ms to 800ms. That latency makes real-time control (robotics, market-making, sub-second native desktop automation, or conversational voice avatars) impossible.
 2. **Predatory Egress Tax & Proprietary Lock-In:** Unbounded token metering coupled with AWS's **$0.09/GB** data egress tax penalizes enterprise agent swarms. Closed-weight models (Anthropic Claude, Amazon Titan) expose enterprises to third-party IP litigation, sudden model deprecations, and opaque telemetry logging.
-3. **Stateless Prompt Chaining & Action Fragility:** Bedrock Agents execute unverified tool calls via non-deterministic prompt chains. If step 4 of 6 fails, external databases and operating systems are left in a corrupted state with zero automated compensating rollback mechanism.
-4. **Zero Physical & Radio Co-Design:** Bedrock is decoupled from physical networking. It cannot interface with 5G/6G O-RAN radio access networks, network interface cards (NICs), or Data Processing Units (DPUs).
+3. **Stateless Prompt Chaining & Action Fragility:** Bedrock Agents execute unverified tool calls through non-deterministic prompt chains. When step 4 of 6 fails midway, external databases and operating systems remain corrupted with zero automated compensating rollback.
+4. **Zero Physical & Radio Co-Design:** Bedrock sits entirely on standard datacenter clouds. It cannot interface with 5G/6G O-RAN radio access networks, network interface cards (NICs), or Data Processing Units (DPUs).
 
-**APEX_AURA** eliminates these vulnerabilities by unifying bare-metal silicon acceleration (**NVIDIA NIM & BlueField-3 DOCA**), sub-millisecond radio edge connectivity (**NVIDIA Aerial 6G & Sionna**), enterprise legal sovereignty (**IBM Granite 3.0 & watsonx.governance**), and atomic native execution (**Apex_CUA**).
+**APEX_AURA** fixes this. It unifies bare-metal silicon acceleration (NVIDIA NIM and BlueField-3 DOCA), sub-millisecond radio edge connectivity (NVIDIA Aerial 6G and Sionna), enterprise legal sovereignty (IBM Granite 3.0 and watsonx.governance), and atomic native execution (Apex_CUA).
 
 ---
 
@@ -37,14 +37,14 @@ Enterprise adoption of hyperscaler managed agent platforms—specifically **AWS 
 
 | Architectural Dimension | AWS Bedrock / Bedrock Agents | APEX_AURA Sovereign Cognitive Fabric | Structural Advantage & Hardware Mechanism |
 | :--- | :--- | :--- | :--- |
-| **Time-To-First-Token (TTFT)** | 400 ms – 800 ms (P50) | **< 15 ms (P50), < 25 ms (P99)** | NVIDIA NIM + TensorRT-LLM on NVLink 900 GB/s + BlueField-3 GPUDirect RDMA bypass. |
-| **Radio Edge Latency (OTA)** | 80 ms – 150 ms (via standard TCP/IP) | **< 1.0 ms (Over-The-Air)** | NVIDIA 6G Aerial O-DU + Sionna Neural PHY/MAC over 6G URLLC dedicated slice. |
+| **Time-To-First-Token (TTFT)** | 400 ms to 800 ms (P50) | **< 15 ms (P50), < 25 ms (P99)** | NVIDIA NIM + TensorRT-LLM on NVLink 900 GB/s + BlueField-3 GPUDirect RDMA bypass. |
+| **Radio Edge Latency (OTA)** | 80 ms to 150 ms (via standard TCP/IP) | **< 1.0 ms (Over-The-Air)** | NVIDIA 6G Aerial O-DU + Sionna Neural PHY/MAC over 6G URLLC dedicated slice. |
 | **Ingress Packet Processing** | Linux Kernel TCP stack interrupt storm | **Zero-Copy Kernel Bypass (DOCA)** | BlueField-3 DPU linespeed packet parsing directly into POSIX SHM ring buffers. |
 | **Agent Action Safety** | Stateless prompt retry (State corruption risk) | **Transactional Rollback Journal ($O(1)$)** | Pre/post condition assertions with atomic LIFO compensating action rollback (0.71 μs). |
 | **Model Sovereignty & IP Indemnity**| Closed weights; proprietary terms; prompt leakage | **IBM Granite 3.0 (Apache 2.0)** | 100% sovereign weights; complete legal IP indemnification; local/air-gapped execution. |
 | **Governance & Regulatory Vault** | Coarse CloudWatch logs; manual audits | **`watsonx.governance` Audit Vault** | Cryptographically signed, Blake3 hash-chained policy compliance enforcement (4.00 μs). |
 | **Context Memory Efficiency** | Linear KV-cache bloat ($O(N)$ memory) | **`Apex_ContextFabric` (32x compression)** | Hierarchical sparse memory tiles + speculative KV-cache reuse. |
-| **GUI & Computer-Use Ingestion** | 1,600+ token raw screenshots (3–5s loop) | **`Apex_CUA` Tri-Modal Kernel** | Native AXUIElement Trie ($0.002\text{ms}$) + SIMD QuadTree ($19.9\text{ms}$, 99.7% pruned). |
+| **GUI & Computer-Use Ingestion** | 1,600+ token raw screenshots (3 to 5s loop) | **`Apex_CUA` Tri-Modal Kernel** | Native AXUIElement Trie ($0.002\text{ms}$) + SIMD QuadTree ($19.9\text{ms}$, 99.7% pruned). |
 | **Deployment Footprint** | AWS Cloud Lock-in exclusively | **Red Hat OpenShift AI (Hybrid/Bare-Metal)** | Deployable on AWS, Azure, GCP, on-prem DGX SuperPODs, or air-gapped sovereign military clusters. |
 
 ---

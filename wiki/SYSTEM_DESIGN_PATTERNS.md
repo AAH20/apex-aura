@@ -6,7 +6,7 @@ This document registers the core architectural and software design patterns impl
 
 ## 1. LMAX Disruptor & Lock-Free Ring Buffer
 - **Subsystem:** `core/shm_ring.py`, `dpu/rdma_roce_receiver.py`
-- **Problem Solved:** Linux kernel networking stacks suffer from thread contention, context switching overhead (5–15μs), and CPU cache line bouncing when handling line-rate 400 Gbps packets.
+- **Problem Solved:** Linux kernel networking stacks suffer from thread contention, context switching overhead (5-15μs), and CPU cache line bouncing when handling line-rate 400 Gbps packets.
 - **Pattern Implementation:** A pre-allocated, double-buffered circular ring buffer in POSIX `/dev/shm`. Producer (BlueField-3 DOCA DMA) and Consumer (Cognitive Router) communicate via atomic sequence counters aligned to 64-byte CPU cache lines (preventing false sharing).
 - **Invariants:**
   - Zero allocation during hot path execution.

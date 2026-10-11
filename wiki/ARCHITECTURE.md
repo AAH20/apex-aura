@@ -12,7 +12,7 @@
 
 Enterprise adoption of hyperscaler agent frameworks (specifically AWS Bedrock, Amazon Bedrock Agents, and SageMaker) has encountered a hard structural ceiling:
 
-1. **The TTFT & Latency Penalty (400ms – 800ms):** Bedrock traffic traverses multi-tenant API gateways, authentication sidecars, and shared virtualized hypervisors. Time-To-First-Token (TTFT) averages 400ms–800ms, making real-time closed-loop control (robotics, high-frequency execution, sub-second native GUI automation, voice/avatar interaction) mathematically impossible.
+1. **The TTFT & Latency Penalty (400ms to 800ms):** Bedrock traffic traverses multi-tenant API gateways, authentication sidecars, and shared virtualized hypervisors. Time-To-First-Token (TTFT) averages 400ms to 800ms, making real-time closed-loop control (robotics, high-frequency execution, sub-second native GUI automation, voice/avatar interaction) mathematically impossible.
 2. **Predatory Egress Tax & Proprietary Lock-In:** Data trapped in AWS incurs severe egress costs ($0.09/GB). Proprietary black-box models (Anthropic Claude, Titan) expose enterprises to copyright liability, opaque telemetry logging, and vendor lock-in.
 3. **Stateless Prompt Chaining & Action Fragility:** Bedrock Agents rely on fragile, non-deterministic prompt chains with zero transactional invariants. If an agent fails on step 4 of 6, external systems (databases, APIs, OS states) are left in a corrupted state with no automated compensating rollback mechanism.
 4. **Zero Physical & Radio Co-Design:** Bedrock is completely detached from physical networking layers. It cannot interface with 5G/6G O-RAN radio access networks, network interface cards (NICs), or Data Processing Units (DPUs).
@@ -25,14 +25,14 @@ Enterprise adoption of hyperscaler agent frameworks (specifically AWS Bedrock, A
 
 | Dimension | AWS Bedrock / Bedrock Agents | APEX_AURA Sovereign Cognitive Fabric | Structural Advantage & Hardware Mechanism |
 | :--- | :--- | :--- | :--- |
-| **Time-To-First-Token (TTFT)** | 400 ms – 800 ms (P50) | **< 15 ms (P50), < 25 ms (P99)** | NVIDIA NIM + TensorRT-LLM on NVLink 900 GB/s + BlueField-3 GPUDirect RDMA bypass. |
-| **Radio Edge Latency (OTA)** | 80 ms – 150 ms (via standard TCP/IP) | **< 1.0 ms (Over-The-Air)** | NVIDIA 6G Aerial O-DU + Sionna Neural PHY/MAC over 6G URLLC dedicated slice. |
+| **Time-To-First-Token (TTFT)** | 400 ms to 800 ms (P50) | **< 15 ms (P50), < 25 ms (P99)** | NVIDIA NIM + TensorRT-LLM on NVLink 900 GB/s + BlueField-3 GPUDirect RDMA bypass. |
+| **Radio Edge Latency (OTA)** | 80 ms to 150 ms (via standard TCP/IP) | **< 1.0 ms (Over-The-Air)** | NVIDIA 6G Aerial O-DU + Sionna Neural PHY/MAC over 6G URLLC dedicated slice. |
 | **Ingress Packet Processing** | Linux Kernel TCP stack interrupt storm | **Zero-Copy Kernel Bypass (DOCA)** | BlueField-3 DPU linespeed packet parsing directly into POSIX SHM ring buffers. |
 | **Agent Action Safety** | Stateless prompt retry (State corruption risk) | **Transactional Rollback Journal ($O(1)$)** | Pre/post condition assertions with atomic LIFO compensating action rollback. |
 | **Model Sovereignty & IP Indemnity**| Closed weights; proprietary terms; prompt leakage | **IBM Granite 3.0 (Apache 2.0)** | 100% sovereign weights; complete legal IP indemnification; local/air-gapped execution. |
 | **Governance & Regulatory Vault** | Coarse CloudWatch logs; manual audits | **`watsonx.governance` Audit Vault** | Cryptographically signed, hash-chained policy compliance enforcement at microsecond granularity. |
 | **Context Memory Efficiency** | Linear KV-cache bloat ($O(N)$ memory) | **`Apex_ContextFabric` (32x compression)** | Hierarchical sparse memory tiles + speculative KV-cache reuse. |
-| **GUI & Computer-Use Ingestion** | 1,600+ token raw screenshots (3–5s loop) | **`Apex_CUA` Tri-Modal Kernel** | Native AXUIElement Trie ($0.002\text{ms}$) + SIMD QuadTree ($19.9\text{ms}$, 99.7% pruned). |
+| **GUI & Computer-Use Ingestion** | 1,600+ token raw screenshots (3 to 5s loop) | **`Apex_CUA` Tri-Modal Kernel** | Native AXUIElement Trie ($0.002\text{ms}$) + SIMD QuadTree ($19.9\text{ms}$, 99.7% pruned). |
 | **Deployment Footprint** | AWS Cloud Lock-in exclusively | **Red Hat OpenShift AI (Hybrid/Bare-Metal)** | Deployable on AWS, Azure, GCP, on-prem DGX SuperPODs, or air-gapped sovereign military clusters. |
 
 ---
